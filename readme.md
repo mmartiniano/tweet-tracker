@@ -6,7 +6,7 @@ Track real-time tweets in english about COVID-19.
 
 This is a **Python 3** project that requires **pip** or whatever python package manager you like.
 
-In order to install all **Python** modules and dependencies in *requirements.txt* file, run:
+In order to install all **Python** modules and dependencies, run:
 
 `pip install -r requirements.txt`
 
