@@ -7,8 +7,6 @@ __logger__ = logging.getLogger()
 
 def main() :
 
-	__logger__.info('Starting...')
-
 	print('Tweet Tracker')
 
 	# Ask for filling settings

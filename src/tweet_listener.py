@@ -81,7 +81,7 @@ class TweetListener(StreamListener) :
 
 		""" Persist tweets data """		
 
-		__logger__.info('Persisting Twitter data...')
+		__logger__.info(f'Persisting {len(self.tweet_list)} tweets...')
 
 		tweets_df = pd.DataFrame(self.tweet_list, columns = ['id', 'datetime', 'location', 'text'])
 

@@ -65,22 +65,42 @@ class Settings() :
 
 
     def fill(self) :
-        """ Ask for all required settings """
+        """ Fill all required settings """
 
         try :
-            self.keywords = ask('Words: ').split(' ')
-            self.languages = ask('Languages: ').split(' ')
-            self.threshold = int(ask('Threshold: '))
 
-            print('Set Twitter credentials')
+            # Settings file
+            if len(argv) == 2 :
 
-            self.consumer_key = ask('Consumer key: ')
-            self.consumer_secret = ask('Consumer secret: ')
-            self.access_token = ask('Access token: ')
-            self.access_token_secret = ask('Access token secret: ')
+                with open(argv[1], 'r') as settings_file :
+
+                    self.keywords =  settings_file.readline().strip().split(' ')
+                    self.languages = settings_file.readline().strip().split(' ')
+                    self.threshold = int(settings_file.readline().strip())
+                    self.consumer_key = settings_file.readline().strip()
+                    self.consumer_secret = settings_file.readline().strip()
+                    self.access_token = settings_file.readline().strip()
+                    self.access_token_secret = settings_file.readline().strip()
+
+            else :
+
+                self.keywords = ask('Words: ').split(' ')
+                self.languages = ask('Languages: ').split(' ')
+                self.threshold = int(ask('Threshold: '))
+
+                print('Set Twitter credentials')
+
+                self.consumer_key = ask('Consumer key: ')
+                self.consumer_secret = ask('Consumer secret: ')
+                self.access_token = ask('Access token: ')
+                self.access_token_secret = ask('Access token secret: ')
 
         except (ValueError, TypeError, KeyboardInterrupt) :
             __logger__.error('Settings error. Aborted.')
+            exit()
+
+        except FileNotFoundError :
+            __logger__.error('Settings file does not exist. Aborted.')
             exit()
 
 
