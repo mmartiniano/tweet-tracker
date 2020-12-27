@@ -1,15 +1,24 @@
-class TweetListener(tweepy.StreamListener) :
+import logging
+import pandas as pd
+from queue import Queue
+from threading import Thread
+from tweepy import StreamListener
+from src.setup import settings
+
+# Logger
+
+# Get Logger instance
+__logger__ = logging.getLogger()
+
+class TweetListener(StreamListener) :
 
 	""" This class retrieves tweeets that match certain criteria  """
 
-	def __init__(self, api, keywords = __keywords__, threshold = __threshold__):
+	def __init__(self, api):
 		self.api = api
 		self.me = api.me()
-		self.keywords = keywords
-		self.threshold = threshold
 		self.tweet_queue = Queue() # Store tweets from tweepy stream
 		self.tweet_list = [] # Store processed tweets
-		self.storage = 'output.csv' # Default storage path
 
 		# Create 5 threads to filter tweets
 		for i in range(5) :
@@ -23,7 +32,7 @@ class TweetListener(tweepy.StreamListener) :
 
 		""" Tweepy.StreamListener.on_status override """
 
-		if len(self.tweet_list) < self.threshold : # Stream threshold
+		if len(self.tweet_list) < settings.threshold : # Stream threshold
 
 			# Add tweet to the queue
 			self.tweet_queue.put(tweet)
@@ -53,7 +62,7 @@ class TweetListener(tweepy.StreamListener) :
 
 				# Tweet stream tracks keywords in attributes beyond text.
 
-				if any(keyword in text.lower() for keyword in self.keywords) : # Check if Tweet text contains any keyword
+				if any(keyword in text.lower() for keyword in settings.keywords) : # Check if Tweet text contains any keyword
 
 					# Auxiliar variable to select tweet info
 					t = [tweet.id, tweet.created_at, tweet.user.location, text]
@@ -75,9 +84,12 @@ class TweetListener(tweepy.StreamListener) :
 		__logger__.info('Persisting Twitter data...')
 
 		tweets_df = pd.DataFrame(self.tweet_list, columns = ['id', 'datetime', 'location', 'text'])
-		tweets_df.to_csv(self.storage, index = False)
 
-		__logger__.info(f'Tweets saved at {self.storage}')
+		storage = f'data/tweets_{settings.running_at}.csv'
+
+		tweets_df.to_csv(storage, index = False)
+
+		__logger__.info(f'Tweets saved at {storage}')
 
 
 	def on_exception(self, exception) :

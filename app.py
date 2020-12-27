@@ -1,4 +1,5 @@
-from src.setup import Settings
+import logging
+from src.setup import settings
 from src.tweet_streamer import TweetStreamer
 
 # Get logger instance
@@ -10,22 +11,11 @@ def main() :
 
 	print('Tweet Tracker')
 
-	# Ask for settings
-
-	settings = Settings()
-	settings.ask()
+	# Ask for filling settings
+	settings.fill()
 
 	# Tweepy stream object
 	tweet_streamer = TweetStreamer()
-
-	# Set tracking config
-
-	tweet_streamer.listener.keywords = settings.keywords
-	tweet_streamer.listener.languages = settings.languages
-	tweet_streamer.listener.threshold = settings.threshold
-
-	# Output file
-	tweet_streamer.listener.storage = f'data/tweets_{settings.running_at}.csv'
 
 	__logger__.info(f'Traking {settings.threshold} tweets in {settings.languages} containing {settings.keywords}')
 

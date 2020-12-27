@@ -32,14 +32,15 @@ __logger__ = logging.getLogger()
 
 
 def ask(question) :
-	""" Ask user to input requested data """
+    """ Ask user to input data """
 
-	answer = input(question)
+    answer = input(question)
 
-    if len(answer.strip()) > 0 : 
-		return answer
-    else :
-		return ask(question)
+    if len(answer.strip()) <= 0 :
+        return ask(question)
+
+    return answer
+
 
 class Settings() :
 
@@ -51,31 +52,36 @@ class Settings() :
                 consumer_key = '',
                 consumer_secret = '',
                 access_token = '',
-                acces_token_secret = '') :
+                access_token_secret = '') :
         
         self.running_at = running_at
         self.keywords = keywords
         self.langauges = languages
         self.threshold = threshold
         self.consumer_key = consumer_key 
-		self.consumer_secret = consumer_secret
-		self.access_token = access_token
-		self.access_token_secret = access_token_secret
+        self.consumer_secret = consumer_secret
+        self.access_token = access_token
+        self.access_token_secret = access_token_secret
 
-    def ask(self) :
+
+    def fill(self) :
         """ Ask for all required settings """
 
-    try :
-		self.keywords = ask('Words: ').split(' ')
-		self.languages = ask('Languages: ').split(' ')
-		self.threshold = int(ask('Threshold: '))
+        try :
+            self.keywords = ask('Words: ').split(' ')
+            self.languages = ask('Languages: ').split(' ')
+            self.threshold = int(ask('Threshold: '))
 
-        print('Set Twitter credentials')
+            print('Set Twitter credentials')
 
-		self.consumer_key = ask('Consumer key: ')
-		self.consumer_secret = ask('Consumer secret: ')
-		self.access_token = ask('Access token: ')
-		self.access_token_secret = ask('Access token secret: ')
+            self.consumer_key = ask('Consumer key: ')
+            self.consumer_secret = ask('Consumer secret: ')
+            self.access_token = ask('Access token: ')
+            self.access_token_secret = ask('Access token secret: ')
 
-	except ValueError, TypeError, KeyboardInterrupt :
-		__logger__.error('Settings error. Aborted.')
+        except (ValueError, TypeError, KeyboardInterrupt) :
+            __logger__.error('Settings error. Aborted.')
+            exit()
+
+
+settings = Settings()
