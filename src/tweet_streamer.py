@@ -145,7 +145,7 @@ class TweetListener(tweepy.StreamListener) :
 		__logger__.info('Persisting Twitter data...')
 
 		tweets_df = pd.DataFrame(self.tweet_list, columns = ['id', 'datetime', 'location', 'text'])
-		tweets_df.to_csv(self.storage)
+		tweets_df.to_csv(self.storage, index = False)
 
 		__logger__.info(f'Tweets saved at {self.storage}')
 
