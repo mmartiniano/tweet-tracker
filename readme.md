@@ -1,26 +1,48 @@
-# COVID-19 Tweets Tracker
+# Tweet Tracker
 
-Track real-time tweets in english about COVID-19.
+Track and store real-time tweets.
 
 ## Requirements
 
-This is a **Python 3** project that requires **pip** or whatever python package manager you like.
-
-In order to install all **Python** modules and dependencies, run:
+This is a **Python 3** project that requires **pip** or whatever python package manager you like. To install all modules and dependencies, run:
 
 `pip install -r requirements.txt`
 
-Since the software consumes Twitter official API to track tweets, you have to register for [Twitter Developer](https://developer.twitter.com/en/apply-for-access) to get your own CONSUMER KEY, CONSUMER SECRET, ACCESS KEY and ACCESS TOKEN SECRET.
+Since the software consumes Twitter official API to track tweets, you have to register for [Twitter Developer](https://developer.twitter.com/en/apply-for-access) to get your own API keys.
 
-## Run
+## Settings
 
-You can run this project by command line setting a optional value for the tweet tracking threshold:
+This program needs some tracking settings to start:
 
-`python app.py [threshold]`
+* Words to track in tweets text: words list separated by white spaces
+* Tweets languages to filter: languages shorthand (en, pt, fr...) list separated by white spaces
+* Threshold: number of tweets to track
 
-If you do not specify a threshold, the tracking process you continue until 2000 tweets be tracked or after manually canceling by pressing `ctrl + C`.
+And Twitter API keys:
 
-Then, you have to set values for CONSUMER KEY, CONSUMER SECRET, ACCESS KEY and ACCESS TOKEN SECRET. If Twitter authentication is successfully done, the program will start to track all tweets in english containing the words: "coronavirus", "covid-19". The process splits tweet info into 4 fields: id, datetime, location and text. Id refers to Twitter tweet original id. Datetime stores whenever the tweet was published. Location is set based on tweet's owner location. Text stores the tweet content text. The process ignores retweets and text case.
+* CONSUMER KEY
+* CONSUMER SECRET
+* ACCESS KEY
+* ACCESS TOKEN SECRET
+
+If you intend to run this program multiple times using the same settings, consider creating a file containing settings value each per line.
+
+## Running
+
+This is a CLI Python software and the command below starts the program. You can pass a optional argument for the settings file or set its values at run-time in default input.
+
+`python app.py [settings_file]`
+
+All set, the program will first try to authenticate your Twitter credentials and it has to accomplish this successfully to proceed. Then, the tracking process starts printing each tweet found until reach the threshold or manually canceling by pressing `CTRL + C`.
+
+The process splits tweet info into 4 fields: 
+
+* id: tweet original Twitter id
+* datetime: whenever the tweet was published
+* location: tweet's owner location
+* text: tweet content text
+
+Retweets and text case difference are intentionally ignored.
 
 A log file into *log* folder will be automatically created for each execution.
 
