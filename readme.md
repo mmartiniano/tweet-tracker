@@ -12,10 +12,10 @@ Since the software consumes Twitter official API to track tweets, you have to re
 
 ## Settings
 
-This program needs some tracking settings to start:
+Some tracking settings are required to start:
 
 * Words to track in tweets text: words list separated by white spaces
-* Tweets languages to filter: languages shorthand (en, pt, fr...) list separated by white spaces
+* Tweets languages to filter: language shorthands (en, pt, fr...) list separated by white spaces
 * Threshold: number of tweets to track
 
 And Twitter API keys:
@@ -25,7 +25,7 @@ And Twitter API keys:
 * ACCESS KEY
 * ACCESS TOKEN SECRET
 
-If you intend to run this program multiple times using the same settings, consider creating a file containing settings value each per line.
+If you intend to run this program multiple times using the same settings, consider creating a file containing settings values, each per line.
 
 ## Running
 
@@ -33,7 +33,7 @@ This is a CLI Python software and the command below starts the program. You can 
 
 `python app.py [settings_file]`
 
-All set, the program will first try to authenticate your Twitter credentials and it has to accomplish this successfully to proceed. Then, the tracking process starts printing each tweet found until reach the threshold or manually canceling by pressing `CTRL + C`.
+All set, the program will first try to authenticate your Twitter credentials and it must accomplish this successfully to proceed. Then, the tracking process starts printing each tweet found until reach the threshold or after you manually canceling by pressing `CTRL + C`.
 
 The process splits tweet info into 4 fields: 
 
