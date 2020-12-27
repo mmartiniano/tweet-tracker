@@ -2,14 +2,10 @@ import os
 import logging
 import tweepy
 
-######################
 # Logger
-######################
 
 # Get Logger instance
 __logger__ = logging.getLogger()
-
-######################
 
 # Twitter credentials are required to run this project.
 # They should be set at runtime.

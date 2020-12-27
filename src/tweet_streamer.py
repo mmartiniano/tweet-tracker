@@ -6,9 +6,7 @@ from queue import Queue
 from threading import Thread
 from src.twitter_api import twitter_api
 
-#
 # Default global variables
-#
 
 # Set default keywords to track over tweets
 __keywords__ = ['coronavirus', 'covid-19']
@@ -19,14 +17,10 @@ __language__ = ['en']
 # Set default stream tracking threshold
 __threshold__ = 2000
 
-######################
 # Logger
-######################
 
 # Get Logger instance
 __logger__ = logging.getLogger()
-
-######################
 
 
 class TweetStreamer() :
