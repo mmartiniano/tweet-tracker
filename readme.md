@@ -51,10 +51,10 @@ The process splits tweet info into 6 fields:
 * datetime: whenever the tweet was published
 * location: tweet's owner location
 * text: tweet content text
-* hastags: hashtags into tweet
+* hashtags: hashtags into tweet
 * mentions: mentions into tweet
 
-Retweets and text case difference are intentionally ignored.
+Retweets and text case differences are intentionally ignored.
 
 A log file into *log* folder will be automatically created for each execution.
 
