@@ -65,7 +65,14 @@ class TweetListener(StreamListener) :
 				if any(keyword in text.lower() for keyword in settings.keywords) : # Check if Tweet text contains any keyword
 
 					# Auxiliar variable to select tweet info
-					t = [tweet.id, tweet.created_at, tweet.user.location, text]
+					t = [
+						tweet.id,
+						str(tweet.created_at),
+						tweet.user.location if tweet.user.location else '',
+						text,
+                    	' '.join([hashtag.get('text') for hashtag in tweet.entities['hashtags']]),
+						' '.join([user_mention.get('screen_name') for user_mention in tweet.entities['user_mentions']])
+					]
 
 					# Show tweet info
 					print(len(self.tweet_list), t)
@@ -83,7 +90,7 @@ class TweetListener(StreamListener) :
 
 		__logger__.info(f'Persisting {len(self.tweet_list)} tweets...')
 
-		tweets_df = pd.DataFrame(self.tweet_list, columns = ['id', 'datetime', 'location', 'text'])
+		tweets_df = pd.DataFrame(self.tweet_list, columns = ['id', 'datetime', 'user_location', 'text', 'hashtags', 'mentions'])
 
 		storage = f'data/tweets_{settings.running_at}.csv'
 

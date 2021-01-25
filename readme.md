@@ -1,6 +1,6 @@
 # Tweet Tracker
 
-Track and store real-time tweets.
+Track and store realtime tweets.
 
 ## Requirements
 
@@ -25,22 +25,34 @@ And Twitter API keys:
 * ACCESS KEY
 * ACCESS TOKEN SECRET
 
-If you intend to run this program multiple times using the same settings, consider creating a file containing settings values, each per line.
+If you intend to run this program multiple times using the same settings, consider creating a file containing settings values, each per line. Below is an example of settings file to track 10000 tweets in english containing words that refer to the COVID-19 pandemic:
+
+```
+covid-19 covid covid19 coronavirus pandemic
+en
+10000
+CONSUMER_KEY
+CONSUMER_SECRET
+ACCESS_KEY
+ACCESS_TOKEN_SECRET
+```
 
 ## Running
 
-This is a CLI Python software and the command below starts the program. You can pass a optional argument for the settings file or set its values at run-time in default input.
+This is a CLI Python software, so the command below starts the program. You can pass a optional argument for the settings file or set its values at runtime in default input.
 
 `python app.py [settings_file]`
 
 All set, the program will first try to authenticate your Twitter credentials and it must accomplish this successfully to proceed. Then, the tracking process starts printing each tweet found until reach the threshold or after you manually canceling by pressing `CTRL + C`.
 
-The process splits tweet info into 4 fields: 
+The process splits tweet info into 6 fields: 
 
 * id: tweet original Twitter id
 * datetime: whenever the tweet was published
 * location: tweet's owner location
 * text: tweet content text
+* hastags: hashtags into tweet
+* mentions: mentions into tweet
 
 Retweets and text case difference are intentionally ignored.
 
