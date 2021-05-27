@@ -4,7 +4,7 @@ Track and store realtime tweets.
 
 ## Requirements
 
-This is a **Python 3** project that requires **pip** or whatever python package manager you like. To install all modules and dependencies, run:
+This is a **Python 3** project that requires **pip** or whatever python package manager you like. To install all modules and dependencies, enter you python virtual environment and run:
 
 `pip install -r requirements.txt`
 
