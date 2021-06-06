@@ -4,7 +4,7 @@ from datetime import datetime
 from os import mkdir, path
 
 # Current date and time
-__running_at__ =  str(datetime.now()).replace(' ', 'T')
+__running_at__ =  str(datetime.now()).replace(' ', 'T').replace(':', '-')
 
 # Create required folders
 if not path.exists('data') or not path.exists('log') :
@@ -45,14 +45,15 @@ def ask(question) :
 class Settings() :
 
     def __init__(self,
-                running_at = __running_at__,
-                keywords = [],
-                languages = [],
-                threshold = 0,
-                consumer_key = '',
-                consumer_secret = '',
-                access_token = '',
-                access_token_secret = '') :
+            running_at = __running_at__,
+            keywords = [],
+            languages = [],
+            threshold = 0,
+            consumer_key = '',
+            consumer_secret = '',
+            access_token = '',
+            access_token_secret = ''
+        ) :
         
         self.running_at = running_at
         self.keywords = keywords
@@ -85,7 +86,7 @@ class Settings() :
             else :
 
                 self.keywords = ask('Words: ').split(' ')
-                self.languages = ask('Languages: ').split(' ')
+                self.languages = input('Languages: ').split(' ')
                 self.threshold = int(ask('Threshold: '))
 
                 print('Set Twitter credentials')
